@@ -1,3 +1,4 @@
+import javax.lang.model.util.ElementScanner6;
 
 /**
  * In order to make our programs even more impressive and interactive, we need to learn how to better leverage
@@ -14,7 +15,10 @@ public class Expressions {
      * @return if b is true, return true. if b is false, return false.
      */
     public boolean returnBoolean(boolean b){
-        return false;
+        if(b)
+            return true;
+        else
+            return false;
     }
 
     /**
@@ -23,7 +27,10 @@ public class Expressions {
      * look into boolean operations to do this without using if/else statements.
      */
     public boolean returnNot(boolean b){
-        return false;
+        if(b)
+            return false;
+        else
+            return true;
     }
 
     /**
@@ -33,7 +40,10 @@ public class Expressions {
      * look into boolean operations to do this without using if/else statements.
      */
     public boolean returnAnd(boolean b1, boolean b2){
-        return false;
+        if(b1 && b2)
+            return true;
+        else
+            return false;
     }
 
     /**
@@ -43,7 +53,10 @@ public class Expressions {
      * look into boolean operations to do this without using if/else statements.
      */
     public boolean returnOr(boolean b1, boolean b2){
-        return false;
+        if(b1 || b2)
+            return true;
+        else
+            return false;
     }
 
 
