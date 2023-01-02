@@ -8,7 +8,18 @@ public class CustomExceptionThrower {
      *
      * I recommend looking at the test case for a good example of try/catch block usage, as well.
      */
-    public void throwCustomException() throws CustomException{
+
+    //test using main
+    /*public static void main(String[] args){
+        try{
+            throwCustomException();
+        }
+        catch(CustomException e){
+            System.out.println("Code: " + e.getCode() + " Exception Message: " + e.getMessage());
+        }
+    }*/
+
+    public static void throwCustomException() throws CustomException{
         try{
             double x = 2/0;
         }
