@@ -8,8 +8,14 @@ public class CustomExceptionThrower {
      *
      * I recommend looking at the test case for a good example of try/catch block usage, as well.
      */
-    public void throwCustomException(){
-
+    public void throwCustomException() throws CustomException{
+        try{
+            double x = 2/0;
+        }
+        catch(Exception e){
+            throw new CustomException("Arithmetic_Exception", "YOU CANNOT DIVIDE BY ZERO",e);
+        }
     }
 
 }
+
