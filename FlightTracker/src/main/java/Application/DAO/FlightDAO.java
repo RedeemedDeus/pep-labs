@@ -7,6 +7,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.mockito.internal.stubbing.answers.DoesNothing;
+
 /**
  * A DAO is a class that mediates the transformation of data between the format of objects in Java to rows in a
  * database. The methods here are mostly filled out, you will just need to add a SQL statement.
@@ -71,7 +73,7 @@ public class FlightDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             //write preparedStatement's setString and setInt methods here.
-            preparedStatement.setInt(0, id);
+            preparedStatement.setInt(1, id);
 
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()){
@@ -113,8 +115,8 @@ public class FlightDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             //write preparedStatement's setString and setInt methods here.
-            preparedStatement.setString(0, flight.getDeparture_city());
-            preparedStatement.setString(1, flight.getArrival_city());
+            preparedStatement.setString(1, flight.getDeparture_city());
+            preparedStatement.setString(2, flight.getArrival_city());
 
 
             preparedStatement.executeUpdate();
@@ -146,13 +148,24 @@ public class FlightDAO {
      * @param id a flight ID.
      * @param flight a flight object.
      */
-    public Flight updateFlight(int flight_id, Flight flight){
-        Flight flightFromDb = this.flightDAO.getFlightById(flight_id);
+    public void updateFlight(int id, Flight flight){
+        Connection connection = ConnectionUtil.getConnection();
+        try {
+            //Write SQL logic here
+            String sql = "UPDATE flight SET departure_city = ?, arrival_city = ? WHERE flight_id = ?;";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-        if(flightFromDb == null) return null; 
+            //write PreparedStatement setString and setInt methods here.
+            preparedStatement.setString(1, flight.getDeparture_city());
+            preparedStatement.setString(2, flight.getArrival_city());
+            preparedStatement.setInt(3, id);
 
-        flightDAO.updateFlight(flight_id, flight);
-        return this.flightDAO.getFlightById(flight_id);
+
+
+            preparedStatement.executeUpdate();
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -177,10 +190,12 @@ public class FlightDAO {
         List<Flight> flights = new ArrayList<>();
         try {
             //Write SQL logic here
-            String sql = "change me";
+            String sql = "SELECT * FROM flight WHERE departure_city = ? and arrival_city = ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             //write PreparedStatement setString and setInt methods here.
+            preparedStatement.setString(1, departure_city);
+            preparedStatement.setString(2, arrival_city);
 
 
             ResultSet rs = preparedStatement.executeQuery();
