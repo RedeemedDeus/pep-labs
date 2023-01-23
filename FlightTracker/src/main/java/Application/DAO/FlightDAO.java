@@ -33,7 +33,7 @@ public class FlightDAO {
         List<Flight> flights = new ArrayList<>();
         try {
             //Write SQL logic here
-            String sql = "change me";
+            String sql = "SELECT * FROM flight;";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet rs = preparedStatement.executeQuery();
@@ -66,11 +66,12 @@ public class FlightDAO {
         Connection connection = ConnectionUtil.getConnection();
         try {
             //Write SQL logic here
-            String sql = "change me";
+            String sql = "SELECT * FROM flight WHERE flight_id = ?;";
             
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             //write preparedStatement's setString and setInt methods here.
+            preparedStatement.setInt(0, id);
 
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()){
@@ -108,10 +109,12 @@ public class FlightDAO {
         try {
             //Write SQL logic here. When inserting, you only need to define the departure_city and arrival_city
             //values (two columns total!)
-            String sql = "change me" ;
+            String sql = "INSERT INTO flight(departure_city,arrival_city) VALUES(?,?);" ;
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             //write preparedStatement's setString and setInt methods here.
+            preparedStatement.setString(0, flight.getDeparture_city());
+            preparedStatement.setString(1, flight.getArrival_city());
 
 
             preparedStatement.executeUpdate();
@@ -143,20 +146,13 @@ public class FlightDAO {
      * @param id a flight ID.
      * @param flight a flight object.
      */
-    public void updateFlight(int id, Flight flight){
-        Connection connection = ConnectionUtil.getConnection();
-        try {
-            //Write SQL logic here
-            String sql = "change me";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+    public Flight updateFlight(int flight_id, Flight flight){
+        Flight flightFromDb = this.flightDAO.getFlightById(flight_id);
 
-            //write PreparedStatement setString and setInt methods here.
+        if(flightFromDb == null) return null; 
 
-
-            preparedStatement.executeUpdate();
-        }catch(SQLException e){
-            System.out.println(e.getMessage());
-        }
+        flightDAO.updateFlight(flight_id, flight);
+        return this.flightDAO.getFlightById(flight_id);
     }
 
     /**
