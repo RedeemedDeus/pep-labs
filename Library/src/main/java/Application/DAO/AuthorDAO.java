@@ -27,8 +27,8 @@ public class AuthorDAO {
         Connection connection = ConnectionUtil.getConnection();
         List<Author> authors = new ArrayList<>();
         try {
-            //Write SQL logic here
-            String sql = "change me";
+            //Write SQL logic here [**DONE**]
+            String sql = "SELECT * FROM author;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()){
