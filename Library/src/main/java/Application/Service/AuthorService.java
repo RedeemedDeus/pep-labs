@@ -35,20 +35,26 @@ public class AuthorService {
         this.authorDAO = authorDAO;
     }
     /**
-     * TODO: Use the AuthorDAO to retrieve all authors.
+     * TODO: Use the AuthorDAO to retrieve all authors. [***DONE***]
      *
      * @return all authors
      */
     public List<Author> getAllAuthors() {
-        return null;
+        List<Author> allauthors = this.authorDAO.getAllAuthors();
+
+        if(allauthors == null) return null;
+        else return allauthors;
     }
     /**
-     * TODO: Use the AuthorDAO to persist an author. The given Author will not have an id provided.
+     * TODO: Use the AuthorDAO to persist an author. The given Author will not have an id provided. [***DONE***]
      *
      * @param author an author object.
      * @return The persisted author if the persistence is successful.
      */
     public Author addAuthor(Author author) {
-        return null;
+        Author persauthor = this.authorDAO.insertAuthor(author);
+
+        if(persauthor == null) return null;
+        else return persauthor;
     }
 }
