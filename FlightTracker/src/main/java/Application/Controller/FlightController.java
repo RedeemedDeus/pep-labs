@@ -110,7 +110,6 @@ public class FlightController {
         }else{
             ctx.json(mapper.writeValueAsString(updatedFlight));
         }
-
     }
 
     /**

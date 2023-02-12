@@ -54,9 +54,7 @@ public class FlightService {
             return null;
         }
 
-        return newflight;
-        
-        
+        return newflight;  
     }
 
     /**
