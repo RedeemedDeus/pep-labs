@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Map;
 
 public class MostCommonCharacter {
     /**
@@ -27,8 +28,13 @@ public class MostCommonCharacter {
         char letter = '!';
         int count = 0;
 
-        for(Map.Entry<>)
+        for(Map.Entry<Character, Integer> set: charcount.entrySet()){
+            if(set.getValue() > count){
+                count = set.getValue();
+                letter = set.getKey();
+            }
+        }
 
-        return ' ';
+        return letter;
     }
 }
